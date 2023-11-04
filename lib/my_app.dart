@@ -1,5 +1,6 @@
-import 'package:feldy/Screens/feed.dart';
-import 'package:feldy/Screens/login.dart';
+// import 'package:feldy/Screens/feed.dart';
+import 'package:feldy/profile/profile_view.dart';
+//import 'package:feldy/Screens/login.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Login(),
+      home: const ProfileView(),
     );
   }
 }

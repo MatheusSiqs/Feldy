@@ -1,4 +1,4 @@
-import 'dart:io';
+//import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -43,8 +43,8 @@ class _FeedState extends State<Feed> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(avatarDiameter/2),
-              child: Image.network(
-                'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+              child: CachedNetworkImage(
+                imageUrl: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
                 fit: BoxFit.cover,
               )
             ),
@@ -63,8 +63,8 @@ class _FeedState extends State<Feed> {
   Widget _postImage(){
     return AspectRatio(
       aspectRatio: 1,
-      child: Image.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+      child: CachedNetworkImage(
+        imageUrl: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
         fit: BoxFit.cover,
       ),
     );
