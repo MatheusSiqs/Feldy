@@ -1,4 +1,4 @@
-class ProfileState{
+/*class ProfileState{
   final User user;
   final bool isCurrentUser;
   final String avatarPath;
@@ -34,4 +34,4 @@ class ProfileState{
       formStatus: formStatus??this.formStatus
     )
   }
-}
+}*/
