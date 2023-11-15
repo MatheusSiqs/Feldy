@@ -1,7 +1,10 @@
 //import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:feldy/Screens/profile_page.dart';
+import 'package:feldy/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Feed extends StatefulWidget {
   const Feed({super.key});
@@ -17,11 +20,17 @@ class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          BlocProvider.of<AuthBloc>(context).add(Logout());
+        },
+        child: const Icon(Icons.logout),
+      ),
       appBar: AppBar(
         title: const Text('Feldy'),
         actions: [
           IconButton(onPressed: () {
-            //Navigator.of(context).push(MaterialPageRoute(builder: (context) => Account()))
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
           }, icon: const Icon(Icons.account_circle),),
         ],
       ),
@@ -83,19 +92,35 @@ class _FeedState extends State<Feed> {
   }
 
   Widget _postView(){
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _postAuthorRow(),
-        _postImage(),
-        _postCaption(),
-      ],
+    return  Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 5,
+              blurRadius: 7,
+              offset: const Offset(0, 3)
+            )
+          ]
+        ),
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _postAuthorRow(),
+            _postImage(),
+            _postCaption(),
+          ],
+        ),
+      ),
     );
   }
 
   Widget _postListView(){
     return ListView.builder(
-      itemCount: 3,
+      itemCount: 6,
       itemBuilder: (context,index){
         return _postView();
       },

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1095896263754",
+    "project_id": "feldy-78d50",
+    "storage_bucket": "feldy-78d50.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095896263754:android:b79c6043965aa662938ab3",
+        "android_client_info": {
+          "package_name": "com.feldy.feldy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChaRpyC863mye53_jvBdHYiLM1xjE0vlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
