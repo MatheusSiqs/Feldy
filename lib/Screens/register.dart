@@ -42,7 +42,7 @@ class _RegisterState extends State<Register> {
     String username = "";
     String password = "";
     return Scaffold(
-      backgroundColor: const Color(0xFF4157ff),
+      backgroundColor: const Color(0xFFcb6ce6),
       body: Center(
         child: Form(
             key: formkey,
@@ -290,7 +290,7 @@ class _RegisterState extends State<Register> {
           },
           style: ElevatedButton.styleFrom(
             minimumSize: const Size(double.infinity, 60),
-            backgroundColor: const Color(0xFF4157ff),
+            backgroundColor: const Color(0xFFcb6ce6),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24.0),
             ),
