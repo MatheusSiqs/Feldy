@@ -1,6 +1,5 @@
 //import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:feldy/Screens/profile_page.dart';
 import 'package:feldy/bloc/auth_bloc.dart';
 import 'package:flutter/material.dart';

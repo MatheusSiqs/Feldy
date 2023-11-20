@@ -1,5 +1,6 @@
 import 'package:feldy/Screens/Feed.dart';
-import 'package:feldy/Screens/register.dart';
+//import 'package:feldy/Screens/register.dart';
+import 'package:feldy/Screens/register_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,10 +12,8 @@ import 'login_screen.dart';
 
 import '../bloc/auth_bloc.dart';
 
-import 'register_screen.dart';
-
 class Wrapper extends StatefulWidget {
-  const Wrapper({Key? key}) : super(key: key);
+  const Wrapper({super.key});
 
   @override
   State<StatefulWidget> createState() {
@@ -75,8 +74,8 @@ Widget unauthenticatedWidget(BuildContext context) {
   return DefaultTabController(
       length: 2,
       child: Scaffold(
-        body: TabBarView(
-          children: [const LoginScreen(), Register()],
+        body: const TabBarView(
+          children: [LoginScreen(), RegisterScreen()],
         ),
         appBar: AppBar(
           title: const Text("Autenticação Necessária"),
