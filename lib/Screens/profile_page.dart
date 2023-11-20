@@ -9,26 +9,45 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Meu Perfil'),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            CircleAvatar(
+            /*CircleAvatar(
               radius: 100,
-              backgroundImage: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'), // Substitua pelo caminho da imagem do perfil
+              child: Image(
+                image: AssetImage('img/perfil.jpg'),
+                fit: BoxFit.cover,
+              ),
+              //NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'), // Substitua pelo caminho da imagem do perfil
+            ),*/
+              Container(
+              width: 250,
+              height: 250,
+              decoration: const BoxDecoration(
+                color: Colors.deepPurple,
+                shape: BoxShape.circle,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(250/2),
+                child:Image.asset(
+                  'img/perfil.jpg',
+                  fit: BoxFit.cover,
+                )
+              ),
             ),
-            SizedBox(height: 20),
-            Text(
-              'Nome: Name',
+            const SizedBox(height: 20),
+            const Text(
+              'Nome: Guilherme Goulart Gritti',
               style: TextStyle(fontSize: 24),
             ),
-            SizedBox(height: 10),
-            Text(
-              'Usuário: @',
+            const SizedBox(height: 10),
+            const Text(
+              'Usuário: @gguilherme-gritti',
               style: TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Data de Nascimento: 01/01/2000', // Substitua pela data de nascimento do usuário
               style: TextStyle(fontSize: 18),
             ),

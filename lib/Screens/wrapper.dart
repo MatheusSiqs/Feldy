@@ -73,15 +73,15 @@ Widget authenticatedWidget(BuildContext context) {
 
 Widget unauthenticatedWidget(BuildContext context) {
   return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         body: TabBarView(
-          children: [const RegisterScreen(), const LoginScreen(), Register()],
+          children: [const LoginScreen(), Register()],
         ),
         appBar: AppBar(
           title: const Text("Autenticação Necessária"),
           bottom: const TabBar(
-            tabs: [Tab(text: "Novo Cadastro"), Tab(text: "Efetuar Login"),Tab(text: "teste",)],
+            tabs: [Tab(text: "Efetuar Login"),Tab(text: "Novo Cadastro",)],
           ),
         ),
       ));

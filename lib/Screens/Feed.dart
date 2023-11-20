@@ -39,43 +39,53 @@ class _FeedState extends State<Feed> {
   }
     Widget _postAuthorRow(){
     double avatarDiameter = 44;
-    return Row(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8),
-          child: Container(
-            width: avatarDiameter,
-            height: avatarDiameter,
-            decoration: const BoxDecoration(
-              color: Colors.deepPurple,
-              shape: BoxShape.circle,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(avatarDiameter/2),
-              child: CachedNetworkImage(
-                imageUrl: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                fit: BoxFit.cover,
-              )
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage())),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Container(
+              width: avatarDiameter,
+              height: avatarDiameter,
+              decoration: const BoxDecoration(
+                color: Colors.deepPurple,
+                shape: BoxShape.circle,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(avatarDiameter/2),
+                child: /*CachedNetworkImage(
+                  imageUrl: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
+                  fit: BoxFit.cover,
+                )*/
+                Image.asset(
+                  'img/perfil.jpg',
+                  fit: BoxFit.cover,
+                )
+              ),
             ),
           ),
-        ),
-        const Text(
-          "username",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-        ),)
-      ],
+          const Text(
+            "Guilherme Gritti",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+          ),)
+        ],
+      ),
     );
   }
 
-  Widget _postImage(){
+  Widget _postImage(int index){
     return AspectRatio(
       aspectRatio: 1,
-      child: CachedNetworkImage(
+      child: /*CachedNetworkImage(
         imageUrl: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
         fit: BoxFit.cover,
-      ),
+      ),*/
+      Image(image: AssetImage('img/img$index.jpeg'),
+        fit: BoxFit.cover
+      )
     );
   }
 
@@ -86,12 +96,12 @@ class _FeedState extends State<Feed> {
         vertical: 6,
       ),
       child: Text(
-        'Cartola, verde que te quero rosa Aka. Mangueira'
+        'Link na bio'
       ),
     );
   }
 
-  Widget _postView(){
+  Widget _postView(int index){
     return  Container(
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
@@ -110,7 +120,7 @@ class _FeedState extends State<Feed> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _postAuthorRow(),
-            _postImage(),
+            _postImage(index),
             _postCaption(),
           ],
         ),
@@ -120,9 +130,9 @@ class _FeedState extends State<Feed> {
 
   Widget _postListView(){
     return ListView.builder(
-      itemCount: 6,
+      itemCount: 5,
       itemBuilder: (context,index){
-        return _postView();
+        return _postView(index);
       },
     );
 }

@@ -1,6 +1,9 @@
 import 'dart:js_interop';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../bloc/auth_bloc.dart';
 
 class Register extends StatefulWidget {
   late String login;
@@ -35,10 +38,13 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> formkey = GlobalKey();
+    String username = "";
+    String password = "";
     return Scaffold(
       body: Center(
         child: Form(
-          key: _formKey,
+          key: formkey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -51,7 +57,7 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       keyboardType: TextInputType.name,
                       validator: (text) {
-                        if (text == null || text.isEmpty) {
+                        if (text!.isEmpty) {
                           return 'O Nome não pode ser vazio';
                         }
                         return null;
@@ -68,13 +74,13 @@ class _RegisterState extends State<Register> {
                     TextFormField(
                       keyboardType: TextInputType.name,
                       validator: (text) {
-                        if (text == null || text.isEmpty) {
+                        if (text!.isEmpty) {
                           return 'O Login não pode ser vazio';
                         }
                         return null;
                       },
-                      onSaved: (newValue) {
-                        widget.login = newValue!;
+                      onSaved: (String? inValue) {
+                        username = inValue!;
                       },
                       decoration: const InputDecoration(
                         labelText: "Login",
@@ -86,10 +92,13 @@ class _RegisterState extends State<Register> {
                       keyboardType: TextInputType.name,
                       obscureText: true,
                       validator: (value) {
-                        if (value == null || value.isNull){
+                        if (value!.isNull){
                           return 'Por favor insira a senha';
                         }
                         return null;
+                      },
+                      onSaved: (String? inValue) {
+                        password = inValue!;
                       },
                       decoration: const InputDecoration(
                         hintText: "Password",
@@ -120,7 +129,14 @@ class _RegisterState extends State<Register> {
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(fontSize: 20),
                 ),
-                onPressed: () { },
+                onPressed: () {
+                  if (formkey.currentState!.validate()) {
+                    formkey.currentState!.save();
+                    // Lançando evento
+                    BlocProvider.of<AuthBloc>(context)
+                        .add(RegisterUser(username: username, password: password));
+                  }
+                 },
                 child: const Text("Cadastre-se"),
               ),
             ],
