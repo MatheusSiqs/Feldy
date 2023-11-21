@@ -135,6 +135,7 @@ class LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: ElevatedButton(
           onPressed: () {
+            formKey.currentState!.save();
             if (!loginData.validForm(loginData)) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: const Text(
@@ -148,7 +149,8 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
               ));
             } else {
-              //
+              BlocProvider.of<AuthBloc>(context).add(LoginUser(
+                  username: loginData.email, password: loginData.password));
             }
           },
           style: ElevatedButton.styleFrom(
