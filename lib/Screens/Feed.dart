@@ -14,9 +14,6 @@ class Feed extends StatefulWidget {
 }
 
 class _FeedState extends State<Feed> {
-  //final _avatar = 'https://setor1.band.uol.com.br/wp-content/uploads/2020/12/cartola-v.jpg';
-  //final _image = 'https://dhhim4ltzu1pj.cloudfront.net/media/images/dash_article_cover01.2e16d0ba.fill-1200x630.jpg';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +24,27 @@ class _FeedState extends State<Feed> {
         child: const Icon(Icons.logout),
       ),
       appBar: AppBar(
-        title: const Text('Feldy'),
+        backgroundColor: Colors.black87,
+        title: const Text('Feeldy'),
         actions: [
-          IconButton(onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage()));
-          }, icon: const Icon(Icons.account_circle),),
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const ProfilePage()));
+            },
+            icon: const Icon(Icons.account_circle),
+          ),
         ],
       ),
       body: _postListView(),
     );
   }
-    Widget _postAuthorRow(){
+
+  Widget _postAuthorRow() {
     double avatarDiameter = 44;
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ProfilePage())),
+      onTap: () => Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const ProfilePage())),
       child: Row(
         children: [
           Padding(
@@ -53,16 +57,11 @@ class _FeedState extends State<Feed> {
                 shape: BoxShape.circle,
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(avatarDiameter/2),
-                child: /*CachedNetworkImage(
-                  imageUrl: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg',
-                  fit: BoxFit.cover,
-                )*/
-                Image.asset(
-                  'img/perfil.jpg',
-                  fit: BoxFit.cover,
-                )
-              ),
+                  borderRadius: BorderRadius.circular(avatarDiameter / 2),
+                  child: Image.asset(
+                    'img/perfil.jpg',
+                    fit: BoxFit.cover,
+                  )),
             ),
           ),
           const Text(
@@ -70,53 +69,44 @@ class _FeedState extends State<Feed> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
-          ),)
+            ),
+          )
         ],
       ),
     );
   }
 
-  Widget _postImage(int index){
+  Widget _postImage(int index) {
     return AspectRatio(
-      aspectRatio: 1,
-      child: /*CachedNetworkImage(
-        imageUrl: 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-        fit: BoxFit.cover,
-      ),*/
-      Image(image: AssetImage('img/img$index.jpeg'),
-        fit: BoxFit.cover
-      )
-    );
+        aspectRatio: 1,
+        child:
+            Image(image: AssetImage('img/img$index.jpeg'), fit: BoxFit.cover));
   }
 
-  Widget _postCaption(){
+  Widget _postCaption() {
     return const Padding(
       padding: EdgeInsets.symmetric(
         horizontal: 8,
         vertical: 6,
       ),
-      child: Text(
-        'Link na bio'
-      ),
+      child: Text('Link na bio'),
     );
   }
 
-  Widget _postView(int index){
-    return  Container(
-        decoration: BoxDecoration(
+  Widget _postView(int index) {
+    return Container(
+      decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3)
-            )
-          ]
-        ),
-        child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3))
+          ]),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _postAuthorRow(),
@@ -128,12 +118,12 @@ class _FeedState extends State<Feed> {
     );
   }
 
-  Widget _postListView(){
+  Widget _postListView() {
     return ListView.builder(
       itemCount: 5,
-      itemBuilder: (context,index){
+      itemBuilder: (context, index) {
         return _postView(index);
       },
     );
-}
+  }
 }
