@@ -13,15 +13,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            /*CircleAvatar(
-              radius: 100,
-              child: Image(
-                image: AssetImage('img/perfil.jpg'),
-                fit: BoxFit.cover,
-              ),
-              //NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'), // Substitua pelo caminho da imagem do perfil
-            ),*/
-              Container(
+            Container(
               width: 250,
               height: 250,
               decoration: const BoxDecoration(
@@ -29,12 +21,11 @@ class ProfilePage extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(250/2),
-                child:Image.asset(
-                  'img/perfil.jpg',
-                  fit: BoxFit.cover,
-                )
-              ),
+                  borderRadius: BorderRadius.circular(250 / 2),
+                  child: Image.asset(
+                    'img/perfil.jpg',
+                    fit: BoxFit.cover,
+                  )),
             ),
             const SizedBox(height: 20),
             const Text(

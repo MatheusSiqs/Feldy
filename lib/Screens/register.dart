@@ -1,15 +1,12 @@
 import 'dart:js_interop';
 
+import 'package:feldy/model/register_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/auth_bloc.dart';
 
 class Register extends StatefulWidget {
-  late String login;
-  late String selectedGender;
-  late DateTime selectedDate = DateTime.now();
-
   Register({super.key});
 
   @override
@@ -19,33 +16,18 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final RegisterData registerUserData =
+      RegisterData(email: "", name: "", password: "");
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-
-    if (picked != null && picked != widget.selectedDate) {
-      setState(() {
-        widget.selectedDate = picked;
-      });
-    }
-  }
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formkey = GlobalKey();
-    String username = "";
-    String password = "";
     return Scaffold(
       backgroundColor: const Color(0xFFcb6ce6),
       body: Center(
         child: Form(
-            key: formkey,
+            key: formKey,
             child: Column(
               children: <Widget>[
                 Container(
@@ -98,7 +80,7 @@ class _RegisterState extends State<Register> {
                       confirmPasswordField(),
                       const SizedBox(height: 40),
                       Row(
-                        children: [registerButton(context)],
+                        children: [registerButton()],
                       )
                     ]),
                   ),
@@ -121,7 +103,7 @@ class _RegisterState extends State<Register> {
         return null;
       },
       onSaved: (String? value) {
-        // registerUserData.email = value ?? "";
+        registerUserData.email = value ?? "";
       },
       decoration: const InputDecoration(
           labelText: 'Email',
@@ -150,7 +132,7 @@ class _RegisterState extends State<Register> {
         return null;
       },
       onSaved: (String? value) {
-        // registerUserData.name = value ?? "";
+        registerUserData.name = value ?? "";
       },
       decoration: const InputDecoration(
           labelText: 'Nome',
@@ -177,18 +159,18 @@ class _RegisterState extends State<Register> {
             return "Insira uma Senha";
           }
 
-          // if (value != registerUserData.confirmPassword) {
-          //   return "Senhas não coincidem";
-          // }
+          if (value != registerUserData.confirmPassword) {
+            return "Senhas não coincidem";
+          }
         }
       },
       onChanged: (String? value) {
         setState(() {
-          // registerUserData.password = value ?? "";
+          registerUserData.password = value ?? "";
         });
       },
       onSaved: (String? value) {
-        // registerUserData.password = value ?? "";
+        registerUserData.password = value ?? "";
       },
       obscureText: true,
       decoration: const InputDecoration(
@@ -217,18 +199,18 @@ class _RegisterState extends State<Register> {
             return "Insira uma Senha";
           }
 
-          // if (value != registerUserData.password) {
-          //   return "Senhas não coincidem";
-          // }
+          if (value != registerUserData.password) {
+            return "Senhas não coincidem";
+          }
         }
       },
       onChanged: (String? value) {
         setState(() {
-          // registerUserData.confirmPassword = value ?? "";
+          registerUserData.confirmPassword = value ?? "";
         });
       },
       onSaved: (String? value) {
-        // registerUserData.confirmPassword = value ?? "";
+        registerUserData.confirmPassword = value ?? "";
       },
       obscureText: true,
       decoration: const InputDecoration(
@@ -248,45 +230,21 @@ class _RegisterState extends State<Register> {
     );
   }
 
-  Widget cancelButton() {
-    return Expanded(
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
-        style: ElevatedButton.styleFrom(
-          minimumSize: const Size(double.infinity, 60),
-          backgroundColor: const Color(0xFFffffff),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24.0),
-          ),
-        ),
-        child: const Text('Cancelar',
-            style: TextStyle(color: Colors.black, fontSize: 16)),
-      ),
-    );
-  }
-
-  Widget registerButton(BuildContext buildContext) {
+  Widget registerButton() {
     Widget buttonChild = const Text(
       'Cadastrar',
       style: TextStyle(fontSize: 16, fontFamily: 'Poppins'),
     );
 
-    // if (state is Loading) {
-    //   if (state.load) {
-    //     buttonChild = const CircularProgressIndicator();
-    //   }
-    // }
-
     return Expanded(
       child: ElevatedButton(
           onPressed: () {
-            // if (formKey.currentState!.validate()) {
-            //   formKey.currentState!.save();
-            //   buildContext.read<AuthBloc>().add(SignUpRequested(
-            //       registerUserData.email, registerUserData.password));
-            // }
+            if (formKey.currentState!.validate()) {
+              formKey.currentState!.save();
+              BlocProvider.of<AuthBloc>(context).add(RegisterUser(
+                  username: registerUserData.email,
+                  password: registerUserData.password));
+            }
           },
           style: ElevatedButton.styleFrom(
             minimumSize: const Size(double.infinity, 60),

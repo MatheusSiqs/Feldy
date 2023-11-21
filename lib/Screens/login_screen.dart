@@ -1,24 +1,33 @@
+import 'package:feldy/model/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/auth_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
   @override
+  State<StatefulWidget> createState() {
+    return LoginScreenState();
+  }
+}
+
+class LoginScreenState extends State<LoginScreen> {
+  final LoginData loginData = LoginData(email: "", password: "");
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  @override
   Widget build(BuildContext context) {
-    GlobalKey<FormState> formkey = GlobalKey();
-    String username = "";
-    String password = "";
     return Center(
       child: Form(
-          key: formkey,
+          key: formKey,
           child: Column(
             children: <Widget>[
               Container(
                 margin: const EdgeInsets.only(top: 35, bottom: 30),
-                width: 120.0,
-                height: 120.0,
+                width: 180.0,
+                height: 180.0,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage('assets/img/feeldy.png'),
@@ -75,7 +84,7 @@ class LoginScreen extends StatelessWidget {
       keyboardType: TextInputType.number,
       validator: (String? value) {},
       onSaved: (String? value) {
-        // loginData.email = value ?? "";
+        loginData.email = value ?? "";
       },
       decoration: const InputDecoration(
           labelText: 'Email',
@@ -98,7 +107,7 @@ class LoginScreen extends StatelessWidget {
       keyboardType: TextInputType.text,
       validator: (String? value) {},
       onSaved: (String? value) {
-        // loginData.password = value ?? "";
+        loginData.password = value ?? "";
       },
       decoration: const InputDecoration(
         labelText: 'Senha',
@@ -125,7 +134,23 @@ class LoginScreen extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            if (!loginData.validForm(loginData)) {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: const Text(
+                  'Formulário de Login Inválido!',
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Colors.red,
+                action: SnackBarAction(
+                  label: 'Fechar',
+                  onPressed: () {},
+                ),
+              ));
+            } else {
+              //
+            }
+          },
           style: ElevatedButton.styleFrom(
             minimumSize: const Size(double.infinity, 60),
             backgroundColor: const Color(0xFFcb6ce6),
